@@ -24,8 +24,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-
-
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Import(WebConfig.class)
@@ -39,7 +37,6 @@ public class SecurityConfig {
 
     @Autowired
     JwtAuthorizationFilter authorizationFilter;
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -55,7 +52,6 @@ public class SecurityConfig {
 
         return source;
     }
-
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, AuthenticationManager authenticationManager) throws Exception {
@@ -90,10 +86,21 @@ public class SecurityConfig {
                 .build();
     }
 
+//    @Bean
+//    UserDetailsService userDetailsService(){
+//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//        manager.createUser(User.withUsername("santiago")
+//                .password("1234")
+//                .roles()
+//                .build());
+//
+//        return manager;
+//    }
+
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
-    }
+   }
 
     @Bean
     AuthenticationManager authenticationManager(HttpSecurity httpSecurity, PasswordEncoder passwordEncoder) throws Exception {
